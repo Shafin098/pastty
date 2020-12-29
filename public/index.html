@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paste to pc</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-size: large;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            background-color: #eeeeee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            padding: 3.5rem;
+            padding-right: 1rem;
+            padding-left: 1rem;
+            background-color: white;
+            border: 2px dashed mediumblue;
+            border-radius: 5px;
+            max-width: 80vw;
+            max-height: 80vh;
+
+        }
+
+        form > * {
+            margin: 0.5rem;
+        }
+
+        form button {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: blue;
+            padding: 0.5rem;
+            color: white;
+            font-weight: bold;
+            border: 1px solid mediumblue;
+            border-radius: 5px;
+        }
+
+        form textarea {
+            background-color: #eeeeee;
+            padding: 0.5rem;
+            border: 0px solid blue;
+            border-radius: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <form action="/paste/" method="GET">
+        <textarea required cols="30" rows="5" type="text" name="text" placeholder="paste text here"></textarea>
+        <button type="submit">PASTE TO PC</button>
+    </form>
+</body>
+</html>
