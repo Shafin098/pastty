@@ -3,7 +3,7 @@
 # Installation guide
 - You need to have [node and npm](https://nodejs.org/en/download/) preinstalled
 - Clone this repository
-- Run `npm install`
+- Run `npm install` inside clone repository
 - Then run `npm link` inside cloned respository. If you want to reinstall run `npm link --force`
 # Usage guide
 - Open any terminal and type `pastty` *Note: You might need to close and open your terminal after running `npm link`*
