@@ -1,5 +1,5 @@
 {
-  "name": "cross-copy",
+  "name": "pastty",
   "version": "1.0.0",
   "description": "Copy from phone to pc",
   "main": "index.js",
@@ -12,7 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "clipboardy": "^2.3.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "qrcode-terminal": "^0.12.0"
   },
   "devDependencies": {}
 }
