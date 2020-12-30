@@ -1,12 +1,14 @@
+#!/usr/bin/env node
 const clippy = require('clipboardy')
 const express = require('express')
 const qrcode = require('qrcode-terminal')
 const dns = require('dns')
 const os = require('os')
+const path = require('path')
 
 const app = express();
 
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, "public")))
 
 app.get('/paste', (req, res) => {
     const pasteFromMobile = req.query['text']
