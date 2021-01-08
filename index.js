@@ -55,13 +55,13 @@ function killServer(port) {
 
 async function startServer(app) {
     const PORT = await getPort()
+    removeFirewallOnPort(PORT)
     app.listen(PORT, () => {
         dns.lookup(os.hostname(), (err, add, fam) => {
             const URL = `http://${add}:${PORT}`
             qrcode.generate(URL, { small: true })
             console.log(`Scan qrcode or open link below`)
             console.log(URL)
-            removeFirewallOnPort(PORT)
         })
     })
 
