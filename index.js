@@ -1,32 +1,19 @@
 #!/usr/bin/env node
 const dns = require('dns')
 const os = require('os')
-const path = require('path')
-const firewall = require('./util/firewall')
-const clippy = require('clipboardy')
-const qrcode = require('qrcode-terminal')
+const http = require('http')
 const getPort = require('get-port')
-const express = require('express')
+const firewall = require('./util/firewall')
+const qrcode = require('qrcode-terminal')
+const app = require('./app')
 
-const app = express();
+const server = http.createServer(app)
+startServer(server)
 
-app.use(express.static(path.join(__dirname, "public")))
-
-app.get('/paste', (req, res) => {
-    const pasteFromMobile = req.query['text']
-    clippy.writeSync(pasteFromMobile)
-    res.redirect('/')
-})
-
-function killServer(app, port) {
-    firewall.resetFirewallToPreviousState(port)
-    app.close(() => console.log("Closing pastty server"))
-}
-
-async function startServer(app) {
+async function startServer(server) {
     const PORT = await getPort()
     firewall.removeFirewallOnPort(PORT)
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
         dns.lookup(os.hostname(), (err, add, fam) => {
             const URL = `http://${add}:${PORT}`
             qrcode.generate(URL, { small: true })
@@ -35,8 +22,11 @@ async function startServer(app) {
         })
     })
 
-    process.on('SIGINT', () => killServer(app, PORT))
-    process.on('SIGTERM', () => killServer(app, PORT))
+    process.on('SIGINT', () => killServer(server, PORT))
+    process.on('SIGTERM', () => killServer(server, PORT))
 }
 
-startServer(app)
+function killServer(server, port) {
+    firewall.resetFirewallToPreviousState(port)
+    server.close(() => console.log("Closing pastty server"))
+}

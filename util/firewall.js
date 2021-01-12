@@ -14,7 +14,7 @@ function resetFirewallToPreviousState(port) {
     if (process.platform != 'win32') {
         return
     }
-    const BLOCK_CONNECTION_ON_PORT_COMMAND = `netsh advfirewall firewall delete rule name="Pastty" dir=in action=allow protocol=TCP localport=${port}`
+    const BLOCK_CONNECTION_ON_PORT_COMMAND = `netsh advfirewall firewall delete rule name="Pastty" dir=in protocol=TCP localport=${port}`
     cmd.runCommand(BLOCK_CONNECTION_ON_PORT_COMMAND)
 }
 
